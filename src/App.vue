@@ -15,8 +15,6 @@ import { defineComponent } from 'vue';
 import BannerComponent from './components/BannerComponent.vue';
 import FormularioComponent from './components/FormularioComponent.vue'
 
-
-
 export default defineComponent({
   name: 'App',
   components: {

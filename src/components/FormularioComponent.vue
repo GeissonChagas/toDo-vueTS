@@ -17,6 +17,7 @@
           class="is-flex is-align-items-center is-justify-content-space-between"
         >
         <CronometroComponent :tempoEmSegundos="tempoEmSegundos" />
+        <BotaoAddComponent />
           <button class="button" @click='iniciar'>
             <span class="icon">
               <i class="fas fa-play"></i>
@@ -38,11 +39,13 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import CronometroComponent from "./CronometroComponent.vue";
+import BotaoAddComponent from "./BotaoAddComponent.vue";
 
 export default defineComponent({
   name: "FormularioComponent",
   components: {
-    CronometroComponent
+    CronometroComponent,
+    BotaoAddComponent
   },
   data () {
     return {
