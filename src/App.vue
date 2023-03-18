@@ -2,10 +2,14 @@
   <main class="columns is-gapless is-multiline">
     <div class="column is-one-quarter">
       <BannerComponent />
-      
     </div>
     <div class="column is-three-quarter">
-      <FormularioComponent />
+      <div v-for="(componente, index) in componentes" :key="index">
+        <component :is="componente" @adicionar-tarefa="adicionarTarefa" />
+      </div>
+      <div>
+        <button id ="add" class="button is-primary" @click="adicionarTarefa">Adicionar</button>
+      </div>
     </div>
   </main>
 </template>
@@ -20,6 +24,16 @@ export default defineComponent({
   components: {
     BannerComponent,
     FormularioComponent
+  },
+  data () {
+    return {
+      componentes: [FormularioComponent]
+    }
+  },
+  methods: {
+    adicionarTarefa() {
+      this.componentes.push(FormularioComponent);
+    }
   }
 });
 </script>
@@ -31,5 +45,8 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+#add{
+  margin: 1rem;
 }
 </style>

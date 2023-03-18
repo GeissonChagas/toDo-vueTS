@@ -17,7 +17,6 @@
           class="is-flex is-align-items-center is-justify-content-space-between"
         >
         <CronometroComponent :tempoEmSegundos="tempoEmSegundos" />
-        <BotaoAddComponent />
           <button class="button" @click='iniciar'>
             <span class="icon">
               <i class="fas fa-play"></i>
@@ -39,18 +38,17 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import CronometroComponent from "./CronometroComponent.vue";
-import BotaoAddComponent from "./BotaoAddComponent.vue";
 
 export default defineComponent({
   name: "FormularioComponent",
   components: {
-    CronometroComponent,
-    BotaoAddComponent
+    CronometroComponent
   },
   data () {
     return {
       tempoEmSegundos: 0,
-      cronometro: 0
+      cronometro: 0,
+      tarefas: [] as { nome: string, tempo: number }[]
     }
   },
   methods: {
@@ -62,6 +60,13 @@ export default defineComponent({
     },
     finalizar() {
       clearInterval(this.cronometro);
+    },
+    adicionarTarefa() {
+      const input = this.$el.querySelector("input");
+      const novaTarefa = { nome: input.value, tempo: this.tempoEmSegundos };
+      this.tarefas.push(novaTarefa);
+      input.value = "";
+      this.tempoEmSegundos = 0;
     }
   }
 });
