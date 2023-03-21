@@ -4,13 +4,13 @@
         class="is-flex is-align-items-center is-justify-content-space-between"
         >
         <CronometroComponent :tempoEmSegundos="tempoEmSegundos" />
-        <button class="button" @click='iniciar'>
+        <button class="button" @click='iniciar' :disabled ="cronometroRodando">
             <span class="icon">
             <i class="fas fa-play"></i>
             </span>
             <span>Play</span>
         </button>
-        <button class="button" @click="finalizar">
+        <button class="button" @click="finalizar" :disabled="!cronometroRodando">
             <span class="icon">
             <i class="fas fa-stop"></i>
             </span>
@@ -33,7 +33,8 @@ export default defineComponent({
     return {
       tempoEmSegundos: 0,
       cronometro: 0,
-      tarefas: [] as { nome: string, tempo: number }[]
+      tarefas: [] as { nome: string, tempo: number }[],
+      cronometroRodando: false
     }
   },
   methods: {
@@ -41,10 +42,12 @@ export default defineComponent({
       this.cronometro = setInterval(() => {
         this.tempoEmSegundos += 1;
       }, 1000);
+      this.cronometroRodando = true;
       console.log("iniciando");
     },
     finalizar() {
       clearInterval(this.cronometro);
+      this.cronometroRodando = false;
     },
     adicionarTarefa() {
       const input = this.$el.querySelector("input");
