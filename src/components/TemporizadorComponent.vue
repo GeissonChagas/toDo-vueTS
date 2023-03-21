@@ -25,7 +25,7 @@ import { defineComponent } from "vue";
 import CronometroComponent from "./CronometroComponent.vue";
 
 export default defineComponent({
-  name: "FormularioComponent",
+  name: "TemporizadorComponent",
   components: {
     CronometroComponent
   },
