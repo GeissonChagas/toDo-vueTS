@@ -9,7 +9,7 @@
       </div>
       <div>
         <button id ="add" class="button is-primary" @click="adicionarTarefa">Adicionar</button>
-        <button id ="add" class="button is-secundary" @click="removerTarefa">Remover</button>
+        <button id ="remove" class="button is-secundary" @click="removerTarefa">Remover</button>
       </div>
     </div>
   </main>
@@ -52,5 +52,14 @@ export default defineComponent({
 }
 #add{
   margin: 1rem;
+}
+
+#remove{
+  margin: 1rem;
+  background-color: #FF0000;
+  color: #FFFFFF;
+}
+#remove:hover{
+  background-color: #FF3333;
 }
 </style>
