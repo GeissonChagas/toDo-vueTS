@@ -9,6 +9,7 @@
       </div>
       <div>
         <button id ="add" class="button is-primary" @click="adicionarTarefa">Adicionar</button>
+        <button id ="add" class="button is-secundary" @click="removerTarefa">Remover</button>
       </div>
     </div>
   </main>
@@ -33,6 +34,9 @@ export default defineComponent({
   methods: {
     adicionarTarefa() {
       this.componentes.push(FormularioComponent);
+    },
+    removerTarefa (index: number) {
+      this.componentes.splice(index, 1)
     }
   }
 });
