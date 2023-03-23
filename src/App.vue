@@ -34,9 +34,11 @@ export default defineComponent({
   methods: {
     adicionarTarefa() {
       this.componentes.push(FormularioComponent);
+      localStorage.setItem('tarefas', JSON.stringify(this.componentes));
     },
     removerTarefa (index: number) {
       this.componentes.splice(index, 1)
+      localStorage.setItem('tarefas', JSON.stringify(this.componentes));
     }
   }
 });
