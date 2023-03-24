@@ -5,12 +5,9 @@
     </div>
     <div class="column is-three-quarter">
       <div v-for="(componente, index) in componentes" :key="index">
-        <component :is="componente" @adicionar-tarefa="adicionarTarefa" />
+        <component :is="componente"  />
       </div>
-      <div>
-        <button id ="add" class="button is-primary" @click="adicionarTarefa">Adicionar</button>
-        <button id ="remove" class="button is-secundary" @click="removerTarefa">Remover</button>
-      </div>
+      <TarefasComponent />
     </div>
   </main>
 </template>
@@ -18,13 +15,15 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import BannerComponent from './components/BannerComponent.vue';
-import FormularioComponent from './components/FormularioComponent.vue'
+import FormularioComponent from './components/FormularioComponent.vue';
+import TarefasComponent from './components/TarefasComponent.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
     BannerComponent,
-    FormularioComponent
+    FormularioComponent,
+    TarefasComponent
   },
   data () {
     return {
