@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <div class="rows">
+    <div class="rows" >
       <div
         class="rows is-8"
         role="form"
