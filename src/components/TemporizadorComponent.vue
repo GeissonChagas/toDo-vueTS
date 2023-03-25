@@ -1,31 +1,28 @@
 <template>
-    <div class="column">
-        <div
-        class="is-flex is-align-items-center is-justify-content-space-between"
-        >
-        <CronometroComponent :tempoEmSegundos="tempoEmSegundos" />
-        <button class="button" @click='iniciar' :disabled ="cronometroRodando">
-            <span class="icon">
-            <i class="fas fa-play"></i>
-            </span>
-            <span>Play</span>
-        </button>
-        <button class="button" @click="finalizar" :disabled="!cronometroRodando">
-            <span class="icon">
-            <i class="fas fa-stop"></i>
-            </span>
-            <span>Stop</span>
-        </button>
-        </div>
-    </div>
-  </template>
+  <div class="is-flex is-align-items-center is-justify-content-space-between">
+    <CronometroComponent :tempoEmSegundos="tempoEmSegundos" />
+    <button class="button" @click="iniciar" :disabled="cronometroRodando">
+      <span class="icon">
+        <i class="fas fa-play"></i>
+      </span>
+      <span>play</span>
+    </button>
+    <button class="button" @click="finalizar" :disabled="!cronometroRodando">
+      <span class="icon">
+        <i class="fas fa-stop"></i>
+      </span>
+      <span>stop</span>
+    </button>
+  </div>
+</template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import CronometroComponent from "./CronometroComponent.vue";
+import CronometroComponent from './CronometroComponent.vue'
 
 export default defineComponent({
-  name: "TemporizadorComponent",
+  name: "Temporizador-Component",
+  emits: ['aoTemporizadorFinalizado'],
   components: {
     CronometroComponent
   },
@@ -33,28 +30,23 @@ export default defineComponent({
     return {
       tempoEmSegundos: 0,
       cronometro: 0,
-      tarefas: [] as { nome: string, tempo: number }[],
       cronometroRodando: false
     }
   },
   methods: {
-    iniciar() {
+    iniciar () {
+      // começar a contagem
+      // 1 seg = 1000 ms
+      this.cronometroRodando = true
       this.cronometro = setInterval(() => {
-        this.tempoEmSegundos += 1;
-      }, 1000);
-      this.cronometroRodando = true;
-      console.log("iniciando");
+        this.tempoEmSegundos += 1        
+      }, 1000)
     },
-    finalizar() {
-      clearInterval(this.cronometro);
-      this.cronometroRodando = false;
-    },
-    adicionarTarefa() {
-      const input = this.$el.querySelector("input");
-      const novaTarefa = { nome: input.value, tempo: this.tempoEmSegundos };
-      this.tarefas.push(novaTarefa);
-      input.value = "";
-      this.tempoEmSegundos = 0;
+    finalizar () {
+      this.cronometroRodando = false
+      clearInterval(this.cronometro)
+      this.$emit('aoTemporizadorFinalizado', this.tempoEmSegundos)
+      this.tempoEmSegundos = 0
     }
   }
 });

@@ -1,35 +1,51 @@
 <template>
-  <div class="box">
-    <div class="rows" >
-      <div
-        class="rows is-8"
-        role="form"
-        aria-label="Formulário para criar uma tarefa"
-      >
-        <h3>Tarefa</h3>
-        <p> 00:00:00 </p>
+  <BoxComponent>
+    <div class="columns">
+      <div class="column is-7">{{ tarefa.descricao || 'Tarefa sem descrição' }}</div>
+      <div class="column">
+        <CronometroComponent :tempoEmSegundos="tarefa.duracaoEmSegundos"/>
       </div>
-      <div>
-        <button id ="remove" class="button is-secundary" @click="removerTarefa">Remover</button>
+      <div class="column">
+        <button class="button is secundary" id="remove" @click="removerTarefa">Remover</button>
       </div>
     </div>
-  </div>
+  </BoxComponent>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent, PropType } from "vue";
+import CronometroComponent from "./CronometroComponent.vue";
+import ITarefa from '../Intefaces/ITarefa';
+import BoxComponent from './BoxComponent.vue'
 
-import { defineComponent } from "vue";
-import CronometroComponent from 'vue';
-
-    export default {
-        name: 'tarefas-component'
+export default defineComponent({
+  name: "Tarefa-Component",
+  components: {
+    CronometroComponent,
+    BoxComponent
+  },
+  props: {
+    tarefa: {
+      type: Object as PropType<ITarefa>,
+      required: true
     }
-
+  },
+  methods: {
+    removerTarefa() {
+      this.$emit("removerTarefa", this.tarefa);
+    }
+  }
+});
 </script>
 
 <style scoped>
-    h3{
-        font-weight: 700;
-        font-size: 20px;
-    }
+  #remove{
+    color: red;
+  }
+
+  #remove:hover{
+    background: rgb(255, 111, 111);
+    color: white;
+    transition: 1s;
+  }
 </style>

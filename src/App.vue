@@ -1,66 +1,71 @@
 <template>
-  <main class="columns is-gapless is-multiline">
+  <main class="columns is-gapless is-multiline" :class="{ 'modo-escuro': modoEscuroAtivo }">
     <div class="column is-one-quarter">
-      <BannerComponent />
+      <BannerComponent @aoTemaAlterado="trocarTema"/>
     </div>
-    <div class="column is-three-quarter">
-      <div v-for="(componente, index) in componentes" :key="index">
-        <component :is="componente"  />
+    <div class="column is-three-quarter conteudo">
+      <FormularioComponent @aoSalvarTarefa="salvarTarefa"/>
+      <div class="lista">
+        <TarefasComponent v-for="(tarefa, index) in tarefas" :key="index" :tarefa="tarefa"/>
+        <BoxComponent v-if="listaEstaVazia">
+          Você não está muito produtivo hoje :(
+        </BoxComponent>
       </div>
-      <TarefasComponent />
     </div>
   </main>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import BannerComponent from './components/BannerComponent.vue';
-import FormularioComponent from './components/FormularioComponent.vue';
-import TarefasComponent from './components/TarefasComponent.vue';
+import BannerComponent from './components/BannerComponent.vue'
+import FormularioComponent from './components/FormularioComponent.vue'
+import TarefasComponent from './components/TarefasComponent.vue'
+import BoxComponent from './components/BoxComponent.vue'
+import ITarefa from './Intefaces/ITarefa'
 
 export default defineComponent({
   name: 'App',
   components: {
     BannerComponent,
     FormularioComponent,
-    TarefasComponent
+    TarefasComponent,
+    BoxComponent
   },
   data () {
     return {
-      componentes: [FormularioComponent]
+      tarefas: [] as ITarefa[],
+      modoEscuroAtivo: false
+    }
+  },
+  computed: {
+    listaEstaVazia () : boolean {
+      return this.tarefas.length === 0
     }
   },
   methods: {
-    adicionarTarefa() {
-      this.componentes.push(FormularioComponent);
-      localStorage.setItem('tarefas', JSON.stringify(this.componentes));
+    salvarTarefa (tarefa: ITarefa) {
+      this.tarefas.push(tarefa)
     },
-    removerTarefa (index: number) {
-      this.componentes.splice(index, 1)
-      localStorage.setItem('tarefas', JSON.stringify(this.componentes));
+    trocarTema (modoEscuroAtivo: boolean) {
+      this.modoEscuroAtivo = modoEscuroAtivo
     }
   }
 });
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+.lista {
+  padding: 1.25rem;
 }
-#add{
-  margin: 1rem;
+main {
+  --bg-primario: #fff;
+  --texto-primario: #000;
 }
-
-#remove{
-  margin: 1rem;
-  background-color: #FF0000;
-  color: #FFFFFF;
+main.modo-escuro {
+  --bg-primario: #2b2d42;
+  --texto-primario: #ddd;
 }
-#remove:hover{
-  background-color: #FF3333;
+.conteudo {
+  background-color: var(--bg-primario);
 }
 </style>

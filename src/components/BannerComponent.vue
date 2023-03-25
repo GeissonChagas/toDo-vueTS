@@ -1,39 +1,55 @@
 <template>
     <header>
-        <h1 class="logo">ToDo VueTS</h1>
+        <h1>
+          <h1>To do Vue-TS</h1>>
+        </h1>
+        <button class="button" @click="alterarTema">
+          {{ textoBotao }}
+        </button>
     </header>
-</template>
-
-<script lang="ts"> // linguaguem TypeScript
-
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-    name: 'BannerComponent'
-})
-</script>
-
-<style scoped> /* Estilo do componente (scoped) */
-    header{
-        background: #0d3b66;
-        width: 100%;
-        height: 100vh;
-    }
-
-    .logo{
-        width: 100%;
-        height: 200px;
-        color: #fff;
-        padding: 1rem;
-        font-weight: 700;
-    }
-
-    @media only screen and (max-width: 768px) {
-        header{
-            padding: 2.5rem;
-            height: auto;
+  </template>
+  
+  <script lang="ts">
+  import { defineComponent } from 'vue'
+  
+  export default defineComponent({
+    name: 'Banner-Component',
+    emits: ['aoTemaAlterado'],
+    data () {
+      return {
+        modoEscuroAtivo: false
+      }
+    },
+    computed: {
+      textoBotao () {
+        if (this.modoEscuroAtivo) {
+          return 'Desativar modo escuro'
         }
-        
+        return 'Ativar modo escuro'
+      }
+    },
+    methods: {
+      alterarTema () {
+        this.modoEscuroAtivo = !this.modoEscuroAtivo
+        this.$emit('aoTemaAlterado', this.modoEscuroAtivo)
+      }
     }
-</style>
-
+  })
+  </script>
+  
+  <style scoped>
+  header {
+    padding: 1rem;
+    background: #0d3b66;
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+  }
+  @media only screen and (max-width: 768px) {
+    header {
+      padding: 2.5rem;
+      height: auto;
+    }
+  }
+  </style>
+  
