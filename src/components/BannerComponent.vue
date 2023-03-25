@@ -1,55 +1,64 @@
 <template>
-    <header>
-        <h1>
-          <h1>To do Vue-TS</h1>>
-        </h1>
-        <button class="button" @click="alterarTema">
-          {{ textoBotao }}
-        </button>
+    <header class="hero is-primary is-fullheight">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            To do Vue-TS
+          </h1>
+          <button class="button is-light" @click="alterarTema">
+            <span class="icon">
+              <i class="fas fa-adjust"></i>
+            </span>
+            <span>{{ textoBotao }}</span>
+          </button>
+        </div>
+      </div>
     </header>
   </template>
   
   <script lang="ts">
-  import { defineComponent } from 'vue'
+  import { defineComponent } from 'vue';
   
   export default defineComponent({
     name: 'Banner-Component',
     emits: ['aoTemaAlterado'],
-    data () {
+    data() {
       return {
-        modoEscuroAtivo: false
-      }
+        modoEscuroAtivo: false,
+      };
     },
     computed: {
-      textoBotao () {
+      textoBotao() {
         if (this.modoEscuroAtivo) {
-          return 'Desativar modo escuro'
+          return 'Desativar modo escuro';
         }
-        return 'Ativar modo escuro'
-      }
+        return 'Ativar modo escuro';
+      },
     },
     methods: {
-      alterarTema () {
-        this.modoEscuroAtivo = !this.modoEscuroAtivo
-        this.$emit('aoTemaAlterado', this.modoEscuroAtivo)
-      }
-    }
-  })
+      alterarTema() {
+        this.modoEscuroAtivo = !this.modoEscuroAtivo;
+        this.$emit('aoTemaAlterado', this.modoEscuroAtivo);
+      },
+    },
+  });
   </script>
   
   <style scoped>
-  header {
-    padding: 1rem;
-    background: #0d3b66;
-    width: 100%;
-    height: 100vh;
-    text-align: center;
+  .hero {
+    background-color: #0d3b66;
   }
-  @media only screen and (max-width: 768px) {
-    header {
-      padding: 2.5rem;
-      height: auto;
-    }
+  
+  .title {
+    margin-bottom: 1.5rem;
+  }
+  
+  .icon {
+    margin-right: 0.5rem;
   }
   </style>
+  
+  
+
+
   
