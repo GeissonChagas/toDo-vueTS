@@ -24,6 +24,12 @@ Para usar o projeto, siga estas etapas:
   - Remova a tarefa da lista clicando no botão "Remover".
 
 ## Prints:
-![print](https://user-images.githubusercontent.com/115817581/227233813-5f49b1e0-5c94-447f-8e52-f791d8fe55af.png)
+
+![print](https://user-images.githubusercontent.com/115817581/227748107-9aad9b5f-54f0-45df-928c-34b71efffc3b.png)
+
 
 ## Vídeos: 
+
+
+https://user-images.githubusercontent.com/115817581/227748102-36b18f6d-9040-4683-9c2f-71bdc2eb6e23.mp4
+
